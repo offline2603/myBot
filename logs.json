@@ -1,0 +1,11 @@
+{
+    "1386580903597178912": {
+        "channel": 1442505261830111394,
+        "enabled": [
+            "message_delete",
+            "message_edit",
+            "member_remove",
+            "member_join"
+        ]
+    }
+}

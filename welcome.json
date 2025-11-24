@@ -1,0 +1,10 @@
+{
+    "1386580903597178912": {
+        "message": "**Must Checkout Following :**\n**-> Must Read <#1411592400333307944> and follow them.**\n**-> Have fun in <#1388829291986554983> **\n\n**Thank You For Joing Our Server**",
+        "channel": 1442495785026457711,
+        "author_name": "{user.name}",
+        "image": "https://cdn.discordapp.com/attachments/1390635119781613588/1419263270094901268/zero_wlcome.png?ex=68d11f6c&is=68cfcdec&hm=4000e4819ad76a892e966e51fb31e94f3a28762d6cbefe308e9cec3ad49cd775&",
+        "title": "Welcome to our server {server}",
+        "footer": "You are {member_count}th member"
+    }
+}
