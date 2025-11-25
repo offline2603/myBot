@@ -34,20 +34,11 @@ class Utility(commands.Cog):
     async def ping(self, interaction: discord.Interaction):
         latency = round(self.client.latency * 1000)
         await interaction.response.send_message(f"Pong! `{latency}ms`",ephemeral=True)
-    
-    # command to create a embed just for testing 
-    @commands.command()
-    async def embed(self,ctx):
-        embed_msg = discord.Embed(color= ctx.author.color,title="Title of Embed",type= 'rich', url= None, description="Description of embed")
-        
-        embed_msg.set_author(name=f"Requested by {ctx.author.name}",icon_url=ctx.author.avatar.url)
-        embed_msg.set_thumbnail(url=ctx.guild.icon)
-        embed_msg.set_image(url=ctx.guild.icon)
-        embed_msg.set_footer(text="footer", icon_url=ctx.author.avatar.url)
-        embed_msg.add_field(name="field name", value="field value", inline=False)
 
-        await ctx.reply(embed=embed_msg)
-
+    # Slash command: greet
+    @app_commands.command(name="greet", description="Greet a user")
+    async def greet(self, interaction: discord.Interaction, user: discord.User):
+        await interaction.response.send_message(f"Hello {user.mention}! 👋", ephemeral=False)
 
 
 async def setup(client):
