@@ -6,27 +6,32 @@ import sys
 from pathlib import Path
 from typing import Optional
 import discord
-from discord.ext import commands,tasks
+from discord.ext import commands, tasks
 from itertools import cycle
-import os
-import asyncio
 from dotenv import load_dotenv
-import json
 
+# Load environment variables
 load_dotenv()
+
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-PREFIX = os.getenv("PREFIX")
+DEFAULT_PREFIX = os.getenv("PREFIX", "!")
 
-def get_server_prefix(client,message):
-    with open("prefixes.json", "r") as f:
-        prefix = json.load(f)
-    return prefix.get(str(message.guild.id), "!")
+# Debug
+print("Loaded Token:", DISCORD_TOKEN)
+print("Loaded Default Prefix:", DEFAULT_PREFIX)
 
+def get_server_prefix(client, message):
+    try:
+        with open("prefixes.json", "r") as f:
+            prefix = json.load(f)
+        return prefix.get(str(message.guild.id), DEFAULT_PREFIX)
+    except:
+        return DEFAULT_PREFIX
 
-PREFIX = get_server_prefix
-
-client = commands.Bot(command_prefix=PREFIX, intents=discord.Intents.all())
-
+client = commands.Bot(
+    command_prefix=get_server_prefix,
+    intents=discord.Intents.all()
+)
 
 @client.event
 async def on_ready():
@@ -43,7 +48,6 @@ async def load():
 async def main():
     async with client:
         await load()
-        await client.start(token=DISCORD_TOKEN)
-
+        await client.start(DISCORD_TOKEN)
 
 asyncio.run(main())
